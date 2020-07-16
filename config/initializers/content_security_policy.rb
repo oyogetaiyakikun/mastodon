@@ -10,6 +10,7 @@ base_host = Rails.configuration.x.web_domain
 
 assets_host   = Rails.configuration.action_controller.asset_host
 assets_host ||= host_to_url(base_host)
+it_host       = "https://miy.pw/"
 
 media_host   = host_to_url(ENV['S3_ALIAS_HOST'])
 media_host ||= host_to_url(ENV['S3_CLOUDFRONT_HOST'])
@@ -22,7 +23,7 @@ Rails.application.config.content_security_policy do |p|
   p.frame_ancestors :none
   p.font_src        :self, assets_host
   p.img_src         :self, :https, :data, :blob, assets_host
-  p.style_src       :self, assets_host
+  p.style_src       :self, assets_host, it_host
   p.media_src       :self, :https, :data, assets_host
   p.frame_src       :self, :https
   p.manifest_src    :self, assets_host
